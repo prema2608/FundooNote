@@ -1,0 +1,52 @@
+package com.bridgelabz.model;
+
+
+import java.io.Serializable;
+import java.security.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "UserNote")
+public class UserNote implements Serializable
+{
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int noteId;
+
+	@Column(name = "title")
+	private String title;
+
+	@Column(name = "description")
+	private String description;
+
+	
+	@CreationTimestamp
+	@Column(name = "createdDate")
+	private Timestamp createdDate;
+
+	@CreationTimestamp
+	@Column(name = "updatedDate")
+	private Timestamp updatedDate;
+
+	@Column(name = "isArchive")
+	private boolean isArchive;
+
+	
+	@Column(name = "isPinned")
+	private boolean isPinned;
+
+
+	@Column(name = "inTrash")
+	private boolean inTrash;
+
+}

@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+/home/admin1/MyFunDooNote/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1627704349.index
+/MyFunDooNote/src/main/java
+/home/admin1/MyFunDooNote/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2789489456.index
+/MyFunDooNote/src/main/resources
+/home/admin1/MyFunDooNote/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1532821930.index
+/FundooNotes/src/main/resources

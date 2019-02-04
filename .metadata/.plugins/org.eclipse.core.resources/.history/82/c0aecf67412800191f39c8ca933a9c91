@@ -1,0 +1,15 @@
+package service;
+import javax.servlet.http.HttpServletRequest;
+
+import model.User;
+
+public interface UserService {
+
+	static boolean register(User user, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	User getUserByEmailId(String emailid, HttpServletRequest request);
+	User updateUser(String emailid, User user, HttpServletRequest request);
+	User deleteUser(String emailid, User user, HttpServletRequest request);
+}

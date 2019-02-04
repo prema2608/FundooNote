@@ -1,0 +1,52 @@
+package com.bridgelabz.utility;
+
+import java.security.Key;
+import java.util.Date;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+@Component
+public class JWTGenerator implements TokenGenerator {
+
+	//The JWT signature algorithm we will be using to sign the token
+   
+	public String generateToken(String id) {
+//		try {
+//			return Jwts.builder().setId(id).claim("roles", "existingUser").setIssuedAt(new Date())
+//					.signWith(SignatureAlgorithm.HS256, "secretKey").compact();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+		
+//		 SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+//
+//		    long nowMillis = System.currentTimeMillis();
+//		    Date now = new Date(nowMillis);
+//
+//		    //We will sign our JWT with our ApiKey secret
+//		    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("secretKey");
+//		    Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+//
+//		    //Let's set the JWT Claims
+//		    JwtBuilder builder = Jwts.builder().setId(id)
+//		                                .setIssuedAt(now)
+//		                                .setSubject(subject)
+//		                                .setIssuer(issuer)
+//		                                .signWith(signatureAlgorithm, signingKey);
+
+			
+	}
+
+	public String VerifyToken(String id) {
+
+		return null;
+	}
+
+}

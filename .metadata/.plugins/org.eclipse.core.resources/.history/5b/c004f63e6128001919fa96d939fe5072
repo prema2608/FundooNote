@@ -1,0 +1,11 @@
+package com.bridgelabz.dao;
+
+import com.bridgelabz.model.UserNote;
+
+public interface NoteDao
+{
+	public int create(UserNote user);
+
+	
+	
+}
