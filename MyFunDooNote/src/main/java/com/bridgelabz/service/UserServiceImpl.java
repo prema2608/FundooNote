@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.dao.UserDao;
@@ -22,20 +23,30 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private EmailUtil emailUtil;
+	
+
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 	@Transactional
 	public boolean register(User user, HttpServletRequest request) {
+		user.setPassword(bcryptEncoder.encode(user.getPassword()));
 		int id = userDao.register(user);
 		if (id > 0) {
 			String token = tokenGenerator.generateToken(String.valueOf(id));
 			System.out.println(token);
-			emailUtil.sendEmail("", "hai", "bye");
+			String verificationLink= "http://localhost:8080/MyFunDooNote/activationstatus/"+token;
+			emailUtil.sendEmail("", "hai", verificationLink);
 			return true;
 		}
 		return false;
 	}
 
 	public User loginUser(String emailId, String password, HttpServletRequest request) {
-		return userDao.loginUser(emailId, password);
+		User user =userDao.loginUser(emailId);
+		if(bcryptEncoder.matches(password, user.getPassword())){
+			return user;
+		}
+		return null;
 	}
 
 	public User updateUser(int id, User user, HttpServletRequest request) {
@@ -57,5 +68,19 @@ public class UserServiceImpl implements UserService {
 		}
 		return user2;
 	}
+	
+
+    public User activateUser(String token, HttpServletRequest request) {
+        int id=tokenGenerator.VerifyToken(token);
+        User user=userDao.getUserById(id);
+        if(user!=null)
+        {
+            user.setActivate_Status(true);
+            userDao.updateUser(id, user);
+        }
+        return user;
+    }
+
+
 
 }

@@ -22,13 +22,13 @@ public class UserDaoImpl implements UserDao {
 		return userId;
 	}
 
-	public User loginUser(String emailId, String password) {
+	public User loginUser(String emailId) {
 
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("from User where emailId= :emailId and password =:password");
+		Query query = session.createQuery("from User where emailId= :emailId");
 		query.setString("emailId", emailId);
-		query.setString("password", password);
+		
 		User user = (User) query.uniqueResult();
 		tx.commit();
 		if (user != null) {

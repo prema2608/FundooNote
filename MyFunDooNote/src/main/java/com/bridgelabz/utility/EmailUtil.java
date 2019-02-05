@@ -19,7 +19,7 @@ public class EmailUtil {
        
             msg.setFrom("prema.s2608@gmail.com");
 
-            msg.setTo("adiga.naveen77@gmail.com");
+            msg.setTo("prema.s2608@gmail.com");
 
             msg.setSubject(subject);
 
@@ -31,6 +31,7 @@ public class EmailUtil {
             mailSender.send(msg);
 
             System.out.println("EMail Sent Successfully!!");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
