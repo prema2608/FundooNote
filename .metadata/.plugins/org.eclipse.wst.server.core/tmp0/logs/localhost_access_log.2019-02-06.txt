@@ -1,0 +1,14 @@
+127.0.0.1 - - [06/Feb/2019:16:10:25 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [06/Feb/2019:16:10:26 +0530] "GET /MyFunDooNote/ HTTP/1.1" 200 52
+0:0:0:0:0:0:0:1 - - [06/Feb/2019:16:11:43 +0530] "POST /MyFunDooNote/createnote?id=31 HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [06/Feb/2019:16:12:08 +0530] "GET /MyFunDooNote/retrievenote?id=31 HTTP/1.1" 404 1047
+0:0:0:0:0:0:0:1 - - [06/Feb/2019:16:12:28 +0530] "GET /MyFunDooNote/retrivenote?id=31 HTTP/1.1" 500 175823
+127.0.0.1 - - [06/Feb/2019:16:13:08 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [06/Feb/2019:16:13:08 +0530] "GET /MyFunDooNote/ HTTP/1.1" 200 52
+0:0:0:0:0:0:0:1 - - [06/Feb/2019:16:13:14 +0530] "GET /MyFunDooNote/retrivenote?id=31 HTTP/1.1" 302 351
+127.0.0.1 - - [06/Feb/2019:18:54:15 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [06/Feb/2019:18:54:16 +0530] "GET /MyFunDooNote/ HTTP/1.1" 200 52
+0:0:0:0:0:0:0:1 - - [06/Feb/2019:18:56:14 +0530] "GET /MyFunDooNote/login?emailId=dhanush@gmail.com&password=123 HTTP/1.1" 500 18867
+127.0.0.1 - - [06/Feb/2019:18:59:03 +0530] "GET / HTTP/1.1" 404 1074
+127.0.0.1 - - [06/Feb/2019:18:59:04 +0530] "GET /MyFunDooNote/ HTTP/1.1" 200 52
+0:0:0:0:0:0:0:1 - - [06/Feb/2019:18:59:11 +0530] "GET /MyFunDooNote/login?emailId=dhanush@gmail.com&password=123 HTTP/1.1" 302 190

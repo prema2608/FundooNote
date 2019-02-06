@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bridgelabz.model.User;
 import com.bridgelabz.model.UserNote;
 
 
@@ -25,7 +26,6 @@ public class NoteDaoImpl implements NoteDao {
 		userId = (Integer) session.save(user);
 		return userId;
 	}
-
 
 
 	public void updateNote(int id, UserNote user) {
@@ -59,6 +59,8 @@ public class NoteDaoImpl implements NoteDao {
 
 
 
+
+
 	@Override
 	public void deleteNote(int id) {
 		Session session = sessionFactory.openSession();
@@ -69,12 +71,17 @@ public class NoteDaoImpl implements NoteDao {
 		tx.commit();
 		session.close();
 	}
-	public List<UserNote> retriveNote() {
+	public List<UserNote> retriveNote(int id) {
 		Session session = sessionFactory.openSession();
-		@SuppressWarnings("unchecked")
-		List<UserNote> listOfNote = session.createQuery("from UserNote").list();
+		Query query=session.createQuery("from UserNote where userId= :userId");
+		query.setInteger("userId", id);
+		List<UserNote> listOfNote = query.list();
 		return listOfNote;
 	}
+
+
+
+
 
 
 

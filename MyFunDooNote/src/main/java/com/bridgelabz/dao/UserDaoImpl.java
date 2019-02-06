@@ -1,4 +1,6 @@
 package com.bridgelabz.dao;
+import javax.servlet.http.HttpServletResponse;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bridgelabz.model.User;
+import com.bridgelabz.utility.TokenGenerator;
 
 
 @Repository
@@ -15,6 +18,9 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Autowired
+	private TokenGenerator tokenGenerator;
+	
 	public int register(User user) {
 		int userId = 0;
 		Session session = sessionFactory.getCurrentSession();
@@ -22,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 		return userId;
 	}
 
-	public User loginUser(String emailId) {
+	public User loginUser(String emailId,HttpServletResponse response) {
 
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -31,9 +37,14 @@ public class UserDaoImpl implements UserDao {
 		
 		User user = (User) query.uniqueResult();
 		tx.commit();
-		if (user != null) {
+		if (user != null&& user.isActivate_Status()==true) {
 			System.out.println("User detail is=" + user.getId() + "," + user.getName() + "," + user.getEmailId() + ","
 					+ user.getMobileNumber());
+			
+			int id1=user.getId();
+			String temp =String.valueOf(id1);
+		String token =	tokenGenerator.generateToken(temp);
+		response.setHeader("userId", token);
 			session.close();
 			return user;
 		} else {
@@ -53,6 +64,8 @@ public class UserDaoImpl implements UserDao {
 		if (user != null) {
 			System.out.println("User detail is=" + user.getId() + "," + user.getName() + "," + user.getEmailId() + ","
 					+ user.getMobileNumber());
+			
+		
 			session.close();
 			return user;
 		} else {

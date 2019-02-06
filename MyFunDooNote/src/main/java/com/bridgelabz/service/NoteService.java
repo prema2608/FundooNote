@@ -8,13 +8,13 @@ import com.bridgelabz.model.UserNote;
 
 public interface NoteService {
 
-	boolean createNote(UserNote user, HttpServletRequest request);
+	boolean createNote(UserNote user, HttpServletRequest request, int id);
 
 	 UserNote updateNote(int id, UserNote user, HttpServletRequest request) ;
 
 	UserNote deleteNote(int id, HttpServletRequest request);
 
-	List<UserNote> retrieveNote(HttpServletRequest request);
+	List<UserNote> retrieveNote(int id,HttpServletRequest request);
 	
 	
 

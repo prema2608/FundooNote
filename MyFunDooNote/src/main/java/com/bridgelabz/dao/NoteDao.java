@@ -10,5 +10,7 @@ public interface NoteDao
 	public UserNote getNoteById(int id);
 	public void updateNote(int id, UserNote user);
 	public void deleteNote(int id);
-	public List<UserNote> retriveNote();
+	public List<UserNote> retriveNote(int id);
+	
+	
 }

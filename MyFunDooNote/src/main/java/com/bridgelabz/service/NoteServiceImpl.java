@@ -9,27 +9,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.dao.NoteDao;
+import com.bridgelabz.dao.UserDao;
+import com.bridgelabz.model.User;
 import com.bridgelabz.model.UserNote;
-import com.bridgelabz.utility.TokenGenerator;
 
 @Service
 public class NoteServiceImpl implements NoteService {
 	@Autowired
 	private NoteDao noteDao;
 	@Autowired
-	private TokenGenerator tokenGenerator;
+	private UserDao userDao;
 
 	@Transactional
-	public boolean createNote(UserNote user, HttpServletRequest request) {
-		int id = noteDao.createNote(user);
-		if (id > 0) {
-			String token = tokenGenerator.generateToken(String.valueOf(id));
-			System.out.println(token);
-			return true;
-		}
-		return false;
+	public boolean createNote(UserNote note, HttpServletRequest request, int id) {
+		User user = userDao.getUserById(id);
+		if (user != null) {
+			note.setUserId(user);
+			int noteid = noteDao.createNote(note);
+			if (noteid > 0) {
+				return true;
+			}
+		}		return false;
 	}
 
+	
+	
 	@Override
 	public UserNote updateNote(int id, UserNote user, HttpServletRequest request) {
 		UserNote user2 = noteDao.getNoteById(id);
@@ -54,15 +58,18 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 	@Transactional
-	public List<UserNote> retrieveNote(HttpServletRequest request) {
-		List<UserNote> listOfNote = noteDao.retriveNote();
+	public List<UserNote> retrieveNote(int id,HttpServletRequest request) {
+		User user=userDao.getUserById(id);
+		if(user!=null)
+		{
+		List<UserNote> listOfNote = noteDao.retriveNote(id);
 		if (!listOfNote.isEmpty()) {
 			return listOfNote;
+		}
 		}
 		return null;
 
 	}
-
 
 
 

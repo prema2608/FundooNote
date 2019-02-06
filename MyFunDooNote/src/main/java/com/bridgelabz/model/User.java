@@ -1,12 +1,16 @@
 package com.bridgelabz.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @SuppressWarnings("serial")
 @Entity
@@ -32,6 +36,19 @@ public class User implements Serializable {
 
 	@Column(name = "activate_Status")
 	private boolean activate_Status;
+	
+	@OneToMany(mappedBy="userId")
+	@JsonIgnore
+	private Set<User> userId;
+
+	
+	public Set<User> getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Set<User> userId) {
+		this.userId = userId;
+	}
 
 	public boolean isActivate_Status() {
 		return activate_Status;
@@ -80,11 +97,13 @@ public class User implements Serializable {
 	public void setMobileNumber(long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", emailId=" + emailId + ", password=" + password
-				+ ", mobileNumber=" + mobileNumber + ",activate_Status=" + activate_Status + "]";
+				+ ", mobileNumber=" + mobileNumber + ", activate_Status=" + activate_Status + ", userId=" + userId
+				+ "]";
 	}
+
 }
 

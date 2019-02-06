@@ -1,6 +1,7 @@
 package com.bridgelabz.service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +36,14 @@ public class UserServiceImpl implements UserService {
 			String token = tokenGenerator.generateToken(String.valueOf(id));
 			System.out.println(token);
 			String verificationLink= "http://localhost:8080/MyFunDooNote/activationstatus/"+token;
-			emailUtil.sendEmail("", "hai", verificationLink);
+			emailUtil.sendEmail("", "Hi, click the link below to verify your email ", verificationLink);
 			return true;
 		}
 		return false;
 	}
 
-	public User loginUser(String emailId, String password, HttpServletRequest request) {
-		User user =userDao.loginUser(emailId);
+	public User loginUser(String emailId, String password, HttpServletRequest request,HttpServletResponse response) {
+		User user =userDao.loginUser(emailId,response);
 		if(bcryptEncoder.matches(password, user.getPassword())){
 			return user;
 		}

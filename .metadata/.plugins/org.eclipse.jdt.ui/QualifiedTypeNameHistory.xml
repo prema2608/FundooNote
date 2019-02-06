@@ -7,7 +7,10 @@
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="java.security.Key"/>
     <fullyQualifiedTypeName name="javax.crypto.spec.SecretKeySpec"/>
-    <fullyQualifiedTypeName name="javax.xml.bind.DatatypeConverter"/>
     <fullyQualifiedTypeName name="org.hibernate.annotations.CreationTimestamp"/>
     <fullyQualifiedTypeName name="java.security.Timestamp"/>
+    <fullyQualifiedTypeName name="com.bridgelabz.model.UserNote"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="io.jsonwebtoken.Claims"/>
+    <fullyQualifiedTypeName name="javax.xml.bind.DatatypeConverter"/>
 </qualifiedTypeNameHistroy>

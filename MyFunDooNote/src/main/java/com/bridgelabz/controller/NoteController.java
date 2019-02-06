@@ -23,10 +23,10 @@ public class NoteController {
 	private NoteService noteService;
 
 	@RequestMapping(value = "/createnote", method = RequestMethod.POST)
-	public ResponseEntity<?> createNote(@RequestBody UserNote user, HttpServletRequest request) {
+	public ResponseEntity<?> createNote(@RequestBody UserNote user, HttpServletRequest request,@RequestParam int id) {
 		
 		try {
-			if (noteService.createNote(user, request))
+			if (noteService.createNote(user, request,id))
 				return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,8 +65,8 @@ public class NoteController {
 	
 	
 	@RequestMapping(value = "/retrivenote", method = RequestMethod.GET)
-    public ResponseEntity<?> retrieveNote(HttpServletRequest request) {
-        List<UserNote> listOfNote = noteService.retrieveNote(request);
+    public ResponseEntity<?> retrieveNote(@RequestParam("id") int id,HttpServletRequest request) {
+        List<UserNote> listOfNote = noteService.retrieveNote(id,request);
         if (!listOfNote.isEmpty()) {
             return new ResponseEntity<List<UserNote>>(listOfNote, HttpStatus.FOUND);
         } else {

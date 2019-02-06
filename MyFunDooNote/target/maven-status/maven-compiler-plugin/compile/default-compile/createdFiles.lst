@@ -1,8 +1,0 @@
-com/bridgelabz/model/User.class
-com/bridgelabz/utility/TokenGenerator.class
-com/bridgelabz/service/UserServiceImpl.class
-com/bridgelabz/controller/USerController.class
-com/bridgelabz/utility/JWTGenerator.class
-com/bridgelabz/dao/UserDaoImpl.class
-com/bridgelabz/dao/UserDao.class
-com/bridgelabz/service/UserService.class
