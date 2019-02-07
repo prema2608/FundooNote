@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bridgelabz.model.User;
+import com.bridgelabz.model.Labels;
 import com.bridgelabz.model.UserNote;
 
 
@@ -75,18 +75,83 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		Query query=session.createQuery("from UserNote where userId= :userId");
 		query.setInteger("userId", id);
+		@SuppressWarnings("unchecked")
 		List<UserNote> listOfNote = query.list();
 		return listOfNote;
 	}
 
 
+	//////////////////////////
+	//labels
+	
+	public int createLabels(Labels label) 
+	{
+		int userId = 0;
+		Session session = sessionFactory.getCurrentSession();
+		userId = (Integer) session.save(label);
+		return userId;
+	}
 
 
+	@Override
+	public Labels getLabelById(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("from Labels where labelId= :labelId");
+		query.setInteger("labelId", id);
+		Labels label = (Labels) query.uniqueResult();
+		tx.commit();
+		if (label != null) {
+						System.out.println("User detail is=" + label.getLabelId() + "," + label.getLabelName()+ ","
+								);
+			session.close();
+			return label;
+		} else {
+			return null;
+		}
+	}
 
 
+	@Override
+	public void editLabel(int id, Labels label) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.update(label);
+		tx.commit();
+		session.close();
+	}		
 
 
+	@Override
+	public void deleteLabel(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("DELETE from Labels u where u.id= :id");
+		query.setInteger("id", id);
+		query.executeUpdate();
+		tx.commit();
+		session.close();
+	}
+
+
+	@Override
+	public List<Labels> retriveLabel(int id) {
+		Session session = sessionFactory.openSession();
+		Query query=session.createQuery("from Labels where userId= :userId");
+		query.setInteger("userId", id);
+		@SuppressWarnings("unchecked")
+		List<Labels> listOfNote = query.list();
+		return listOfNote;
+	}	
 }
+
+
+
+
+
+
+
+
 
 
 

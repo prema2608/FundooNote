@@ -1,0 +1,69 @@
+package com.bridgelabz.model;
+
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "Labels")
+public class Labels implements Serializable {
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int labelId;
+
+	@Column(name = "labelName")
+	private String labelName;
+
+
+//	@ManyToOne
+//	@JoinColumn(name="userId", nullable=false)
+//	private User userId;
+
+
+	public int getLabelId() {
+		return labelId;
+	}
+
+
+	public void setLabelId(int labelId) {
+		this.labelId = labelId;
+	}
+
+
+	public String getLabelName() {
+		return labelName;
+	}
+
+
+	public void setLabelName(String labelName) {
+		this.labelName = labelName;
+	}
+
+//
+//	public User getUserId() {
+//		return userId;
+//	}
+//
+//
+//	public void setUserId(User userId) {
+//		this.userId = userId;
+//	}
+
+
+	@Override
+	public String toString() {
+		return "Labels [labelId=" + labelId + ", labelName=" + labelName +  "]";
+	}
+	
+	
+
+}

@@ -39,14 +39,26 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy="userId")
 	@JsonIgnore
-	private Set<User> userId;
+	private Set<UserNote> userId;
+	
+	@OneToMany(mappedBy="userId")
+	@JsonIgnore
+	private Set<Labels> setoflabel;
 
 	
-	public Set<User> getUserId() {
+	public Set<Labels> getSetoflabel() {
+		return setoflabel;
+	}
+
+	public void setSetoflabel(Set<Labels> setoflabel) {
+		this.setoflabel = setoflabel;
+	}
+
+	public Set<UserNote> getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Set<User> userId) {
+	public void setUserId(Set<UserNote> userId) {
 		this.userId = userId;
 	}
 

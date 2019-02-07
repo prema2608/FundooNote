@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bridgelabz.model.Labels;
 import com.bridgelabz.model.UserNote;
 
 public interface NoteService {
@@ -15,6 +16,17 @@ public interface NoteService {
 	UserNote deleteNote(int id, HttpServletRequest request);
 
 	List<UserNote> retrieveNote(int id,HttpServletRequest request);
+
+	
+	
+	
+	boolean createLabel(String token,Labels label, HttpServletRequest request);
+
+	Labels editLabel(int id, Labels label, HttpServletRequest request);
+
+	Labels deleteLabel(int id, HttpServletRequest request);
+
+	List<Labels> retriveLabel(int id, HttpServletRequest request);
 	
 	
 

@@ -1,0 +1,28 @@
+package com.bridgelabz.service;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.bridgelabz.model.Labels;
+import com.bridgelabz.model.UserNote;
+
+public interface NoteService {
+
+	boolean createNote(UserNote user, HttpServletRequest request, int id);
+
+	 UserNote updateNote(int id, UserNote user, HttpServletRequest request) ;
+
+	UserNote deleteNote(int id, HttpServletRequest request);
+
+	List<UserNote> retrieveNote(int id,HttpServletRequest request);
+
+	boolean createLabel(Labels label, HttpServletRequest request, int id);
+	
+	
+
+	
+	
+	
+	
+}
