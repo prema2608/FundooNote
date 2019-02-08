@@ -64,7 +64,6 @@ public class UserDaoImpl implements UserDao {
 		if (user != null) {
 			System.out.println("User detail is=" + user.getId() + "," + user.getName() + "," + user.getEmailId() + ","
 					+ user.getMobileNumber());
-			
 		
 			session.close();
 			return user;

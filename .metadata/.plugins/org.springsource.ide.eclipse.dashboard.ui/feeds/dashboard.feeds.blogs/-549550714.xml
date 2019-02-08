@@ -5,7 +5,20 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2019-02-06T21:17:35Z</updated>
+  <updated>2019-02-08T01:10:09Z</updated>
+  <entry>
+    <title>A Bootiful Podcast: Dror Weiss</title>
+    <link rel="alternate" href="https://spring.io/blog/2019/02/08/a-bootiful-podcast-dror-weiss" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2019-02-08:3558</id>
+    <updated>2019-02-08T01:10:09Z</updated>
+    <content type="html">&lt;p&gt;Hi Spring fans! In this installment I talk to Dror Weiss, CEO of Codota, a company that seeks to make smart code completion in your IDE even smarter.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.codota.com/"&gt;Codota&lt;/a&gt;&lt;br/&gt;&lt;a href="http://www.linkedin.com/in/drorwe"&gt;Dror Weiss&amp;rsquo; LinkedIn Page&lt;/a&gt;&lt;/p&gt;
+&lt;iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/571909224&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"&gt;&lt;/iframe&gt;</content>
+  </entry>
   <entry>
     <title>Spring Cloud Data Flow and Skipper 2.0 M2 Released</title>
     <link rel="alternate" href="https://spring.io/blog/2019/02/06/spring-cloud-data-flow-and-skipper-2-0-m2-released" />
@@ -1423,94 +1436,5 @@ cf restart myapp
     <updated>2019-01-18T00:00:00Z</updated>
     <content type="html">&lt;p&gt;In this week&amp;rsquo;s installment I talk to Google Cloud developer advocate, fellow Java Champion and prolific speaker and open source contributor in the Kubernetes and Spring communities, &lt;a href="http://twitter.com/saturnism"&gt;Ray Tsang&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Listen to the Podcast on &lt;a href="https://soundcloud.com/a-bootiful-podcast/google-developer-advocate-ray-tsang"&gt;SoundCloud&lt;/a&gt; or on &lt;a href="https://itunes.apple.com/us/podcast/a-bootiful-podcast/id1438691771?mt=2"&gt;iTunes&lt;/a&gt;, among other places. &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Bootiful Azure: Object Storage Service (5/6)</title>
-    <link rel="alternate" href="https://spring.io/blog/2019/01/17/bootiful-azure-object-storage-service-5-6" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2019-01-02:3517</id>
-    <updated>2019-01-17T00:00:00Z</updated>
-    <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;This is part 5 of a 6 part series, with new posts Mondays and Thursdays, introducing Microsoft Azure for Spring developers. I couldn&amp;rsquo;t have put this together without input from Microsoft&amp;rsquo;s Asir Vedamuthu Selvasingh, Yitao Dong, Bruno Borges, Brian Benz and Theresa Nguyen. You can find the code for this series &lt;a href="https://github.com/joshlong/bootiful-azure-article"&gt;on Github&lt;/a&gt;. Hit me up on &lt;a href="http://twitter.com/Starbuxman"&gt;Twitter (@starbuxman)&lt;/a&gt; as you&amp;rsquo;re reading the installments with any feedback or questions. You can also learn more about Microsoft Azure in my &lt;a href="http://twitter.com/SpringTipsLive"&gt;Spring Tips (@SpringTipsLive)&lt;/a&gt; installment, &lt;a href="https://spring.io/blog/2018/12/05/spring-tips-bootiful-microsoft-azure"&gt;&lt;em&gt;Bootiful Azure&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Here are all the installments: &lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2019/01/03/bootiful-azure-taking-your-first-steps-with-microsoft-azure-1-6"&gt;Bootiful Azure: Taking Your First Steps with Microsoft Azure&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2019/01/07/bootiful-azure-sql-based-data-access-with-microsoft-sql-server-2-6"&gt;Bootiful Azure: SQL-based data access with Microsoft SQL Server&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2019/01/10/bootiful-azure-global-scale-data-access-with-cosmosdb-3-6"&gt;Bootiful Azure: Global Scale Data Access with CosmosDB&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2019/01/14/bootiful-azure-integration-with-azure-service-bus-4-6"&gt;Bootiful Azure: Integration with Azure Service Bus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2019/01/17/bootiful-azure-object-storage-service-5-6"&gt;Bootiful Azure: Object Storage Service&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2019/01/21/bootiful-azure-to-production-6-6"&gt;Bootiful Azure: To Production!&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Now let&amp;rsquo;s turn to something a bit more&amp;hellip; mundane. Something that you, ideally, won&amp;rsquo;t even think about all that often. Applications often have storage requirements: they may need to store uploaded user content (binary data like pictures or documents), generated artifacts like PDF files, videos, music, etc. They might want to store logs. It&amp;rsquo;s not hard to think of things an application might want to durably store. &lt;/p&gt;
-&lt;p&gt;These applications &lt;em&gt;could&lt;/em&gt; use a filesystem, such as that on the local machine or a network attached filesystem like &lt;a href="https://en.wikipedia.org/wiki/Network_File_System"&gt;NFS (network file system)&lt;/a&gt;. I&amp;rsquo;ll use NFS to generically refer to any network attached file system like Samba, NFS (those mounted with the NFS protocol) itself, or legacy options like DAC, FAL, etc. NFS options provide a filesystem-like interface to files, often in a hierarchical format. NFS options are interesting because they&amp;rsquo;re like fileystems with which we&amp;rsquo;re all familiar, and everybody knows how to work with filesystems, right? Surely, everything looks like the hierarchy expressed in Windows Explorer? Or macOS Finder? Except, they look nothing like each other&amp;hellip;&lt;/p&gt;
-&lt;p&gt;Come to think of it, I had to say &amp;ldquo;like&amp;rdquo; when I said that NFS options are like filesystems. Some support more nuanced permissions models than others. Some support encoding and replication of metatadata attached to files and directories in the tree. Support support different speed guarantees for different operations; some filesystems may optimize for reads versus writes. Some might optimize for directory traversals. The client&amp;rsquo;s perspective of a file read or write is different depending on the client used. (Is a write consistent on all replication nodes immediately?) &lt;/p&gt;
-&lt;p&gt;Even if we assumed all the filesystems to which we wanted to write were POSIX-friendly - you could use &lt;code&gt;int open(const char *path, int flags)&lt;/code&gt; or &lt;code&gt;java.io.File&lt;/code&gt; - this may not be the case for our clients. What if the client doesn&amp;rsquo;t &amp;ldquo;speak&amp;rdquo; filesystem, and would prefer to manipulate the data in some other way? What if the client can only speak HTTP? Or if it wanted to speak Bittorrent for more efficient consolidation of downloads through peer-to-peer networks? &lt;/p&gt;
-&lt;p&gt;For these reasons, and more, Amazon Web Services introduced S3, the Simple Cloud Storage Service (get it? &amp;ldquo;S&amp;rdquo; times 3? &amp;ldquo;S3&amp;rdquo;?) which has since been something of a prevailing standard that all other cloud vendors need to support. For Microsoft Azure, the Object Storage Service (OSS) is the thing that provides an S3-like experience. It is not a POSIX filesystem. You can use its API directly, as we will here, but it&amp;rsquo;s &lt;a href="https://www.microsoft.com/developerblog/2016/05/22/access-azure-blob-storage-from-your-apps-using-s3-api/"&gt;also possible to use the S3Proxy to proxy writes to OSS&lt;/a&gt; using an AWS S3 client, of which there are countless! Azure&amp;rsquo;s Object Storage Service truly is &lt;em&gt;boring&lt;/em&gt; which is exactly what you want when dealing with something so fundamental as persistant volumes of file-like data. It even offers a standalone browser called &lt;a href="https://azure.microsoft.com/en-us/features/storage-explorer/"&gt;the Microsoft Azure Storage Explorer&lt;/a&gt; which runs (yep!) on Linux, Macintosh and Windows. That standalone browser lets you interrogate OSS stores &lt;em&gt;as well as&lt;/em&gt; CosmosDB data. How&amp;rsquo;s that for convenient? You can of course use the &lt;code&gt;az&lt;/code&gt; CLI or the API itself. We&amp;rsquo;re going to use the Spring integration for the Java API. &lt;/p&gt;&lt;h2&gt;&lt;a href="#configuring-azure-object-storage-service" class="anchor" name="configuring-azure-object-storage-service"&gt;&lt;/a&gt;Configuring Azure Object Storage Service&lt;/h2&gt;
-&lt;p&gt;You&amp;rsquo;ve got to create an Azure Object Storage Service account (&lt;code&gt;bootiful&lt;/code&gt;) assigned to the existing resource group &lt;code&gt;bootiful&lt;/code&gt;. Then, create a storage container (&lt;code&gt;files&lt;/code&gt;) assigned to the just-created storage account. Here&amp;rsquo;s a sample script.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint shell"&gt;#!/usr/bin/env bash&#xD;
-&#xD;
-rg=$1&#xD;
-accountname=bootiful&#xD;
-&#xD;
-az storage account create --name ${accountname} --resource-group ${rg}&#xD;
-az storage container create -n files --account-name ${accountname}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Use the following command to ascertain the connection string required to connect to the application.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint shell"&gt;az storage account show-connection-string --resource-group bootiful --name bootiful
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note the connection string for later.&lt;/p&gt;&lt;h2&gt;&lt;a href="#introducing-azure-object-storage-service-into-your-spring-application" class="anchor" name="introducing-azure-object-storage-service-into-your-spring-application"&gt;&lt;/a&gt;Introducing Azure Object Storage Service into your Spring Application&lt;/h2&gt;
-&lt;p&gt;Add &lt;code&gt;com.microsoft.azure&lt;/code&gt;: &lt;code&gt;azure-storage-spring-boot-starter&lt;/code&gt; to your application&amp;rsquo;s build file. Make sure you&amp;rsquo;ve specified the OSS connection string for the &lt;code&gt;azure.storage.connection-string&lt;/code&gt; property.&lt;/p&gt;
-&lt;p&gt;We&amp;rsquo;ll read the bytes for an image of a cat in our application&amp;rsquo;s &lt;code&gt;src/main/resources&lt;/code&gt; directory and then write those bytes to the Object Storage Service as a &amp;ldquo;block blog&amp;rdquo;. There are other interfaces through which you can talk to OSS, but for our purposes it&amp;rsquo;s very natural to think about it as an ensemble of &amp;ldquo;containers&amp;rdquo; (logical groupings of things, almost like a directory or a bucket in S3 parlance) and &amp;ldquo;blobs.&amp;rdquo; A blob is a file, basically, with a name and metadata associated with it. All that the following example does is store the bytes for a photo of a cat into a container called &lt;code&gt;files&lt;/code&gt; under a random name prefixed with &lt;code&gt;cat-&lt;/code&gt; and suffixed with &lt;code&gt;.jpg&lt;/code&gt;. &lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package com.example.bootifulazure;&#xD;
-&#xD;
-import com.microsoft.azure.storage.CloudStorageAccount;&#xD;
-import com.microsoft.azure.storage.StorageException;&#xD;
-import com.microsoft.azure.storage.blob.CloudBlobContainer;&#xD;
-import com.microsoft.azure.storage.blob.CloudBlockBlob;&#xD;
-import lombok.extern.log4j.Log4j2;&#xD;
-import org.springframework.beans.factory.annotation.Value;&#xD;
-import org.springframework.boot.context.event.ApplicationReadyEvent;&#xD;
-import org.springframework.context.event.EventListener;&#xD;
-import org.springframework.core.io.Resource;&#xD;
-import org.springframework.stereotype.Component;&#xD;
-&#xD;
-import java.io.InputStream;&#xD;
-import java.net.URISyntaxException;&#xD;
-import java.util.UUID;&#xD;
-&#xD;
-@Log4j2&#xD;
-@Component&#xD;
-class ObjectStorageServiceDemo {&#xD;
-&#xD;
-    private final CloudStorageAccount cloudStorageAccount;&#xD;
-    private final Resource resource;&#xD;
-    private final CloudBlobContainer files;&#xD;
-&#xD;
-    ObjectStorageServiceDemo(&#xD;
-        CloudStorageAccount csa,&#xD;
-        @Value(&amp;quot;classpath:/cat.jpg&amp;quot;) Resource cat) throws URISyntaxException, StorageException {&#xD;
-        this.resource = cat;&#xD;
-        this.cloudStorageAccount = csa;&#xD;
-        this.files = this.cloudStorageAccount&#xD;
-            .createCloudBlobClient()&#xD;
-            .getContainerReference(&amp;quot;files&amp;quot;);&#xD;
-    }&#xD;
-&#xD;
-    @EventListener(ApplicationReadyEvent.class)&#xD;
-    public void demo() throws Exception {&#xD;
-        CloudBlockBlob blockBlobReference = this.files.getBlockBlobReference(&amp;quot;cat-&amp;quot; + UUID.randomUUID().toString() + &amp;quot;.jpg&amp;quot;);&#xD;
-        try (InputStream in = this.resource.getInputStream()) {&#xD;
-            blockBlobReference.upload(in, this.resource.contentLength());&#xD;
-            log.info(&amp;quot;uploaded blockblob to &amp;quot; + blockBlobReference.getStorageUri());&#xD;
-        }&#xD;
-&#xD;
-    }&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The Microsoft Azure-specific bits are less than trivial. We obtain a reference to a container and then write to it and then log out the addressable URI of the resource. How &lt;em&gt;mundane&lt;/em&gt;! And that&amp;rsquo;s exactly what you want in a computing system primitive like a filesystem. It should be &lt;em&gt;mundane&lt;/em&gt;. To be very honest, I was more pleased with getting to use Java 7&amp;rsquo;s try-with-resources syntax for the &lt;code&gt;Autocloseable&lt;/code&gt; &lt;code&gt;InputStream&lt;/code&gt; reference! &lt;/p&gt;</content>
   </entry>
 </feed>

@@ -10,3 +10,7 @@
 1549262660196	Rename package 'utility'
 1549264345745	Rename resource 'Dispachter_Servlet.xml'
 1549264440347	Rename resource 'Dispatcher-Servlet.xml'
+1549610638286	Rename type 'USerController'
+1549610652551	Rename type 'NoteController'
+1549612893131	Rename local variable 'listOfLabel'
+1549612911415	Rename local variable 'note'

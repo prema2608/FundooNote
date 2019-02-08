@@ -9,13 +9,13 @@ import com.bridgelabz.model.UserNote;
 
 public interface NoteService {
 
-	boolean createNote(UserNote user, HttpServletRequest request, int id);
+	boolean createNote(String token, UserNote user, HttpServletRequest request);
 
 	 UserNote updateNote(int id, UserNote user, HttpServletRequest request) ;
 
-	UserNote deleteNote(int id, HttpServletRequest request);
+	UserNote deleteNote(int id,String token, HttpServletRequest request);
 
-	List<UserNote> retrieveNote(int id,HttpServletRequest request);
+	List<UserNote> retrieveNote(String token,HttpServletRequest request);
 
 	
 	
@@ -26,7 +26,12 @@ public interface NoteService {
 
 	Labels deleteLabel(int id, HttpServletRequest request);
 
-	List<Labels> retriveLabel(int id, HttpServletRequest request);
+	List<Labels> retriveLabel(String token, HttpServletRequest request);
+
+	boolean mergeLabelToNote(String token, int noteId, int labelId, HttpServletRequest request);
+
+	boolean deleteLabelToNote(String token, int noteId, int labelId, HttpServletRequest request);
+	
 	
 	
 

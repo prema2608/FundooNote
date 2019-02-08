@@ -3,12 +3,17 @@ package com.bridgelabz.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -57,7 +62,10 @@ public class UserNote implements Serializable
 	@JoinColumn(name="userId", nullable=false)
 	private User userId;
 	
-
+	@ManyToMany(fetch=FetchType.EAGER,targetEntity= Labels.class,cascade = CascadeType.ALL)
+	   @JoinTable(name = "Note_Label", joinColumns = { @JoinColumn(name = "noteId") }, inverseJoinColumns = { @JoinColumn(name = "labelId") })
+	   List<Labels> labelList;
+	
 	public User getUserId() {
 		return userId;
 	}
@@ -145,6 +153,16 @@ public class UserNote implements Serializable
 
 	public void setInTrash(boolean inTrash) {
 		this.inTrash = inTrash;
+	}
+	
+
+	public List<Labels> getLabelList() {
+		return labelList;
+	}
+
+
+	public void setLabelList(List<Labels> labelList) {
+		this.labelList = labelList;
 	}
 
 

@@ -16,7 +16,6 @@ import com.bridgelabz.model.UserNote;
 @Repository
 public class NoteDaoImpl implements NoteDao {
 
-
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -28,7 +27,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 
-	public void updateNote(int id, UserNote user) {
+	public void updateNote(UserNote user) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		session.update(user);
@@ -36,37 +35,24 @@ public class NoteDaoImpl implements NoteDao {
 		session.close();
 	}
 
-
-
 	@Override
 	public UserNote getNoteById(int id) {
 
 		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("from UserNote where id= :id");
-		query.setInteger("id", id);
-		UserNote user = (UserNote) query.uniqueResult();
-		tx.commit();
-		if (user != null) {
-			//			System.out.println("User detail is=" + user.getId() + "," + user.getName() + "," + user.getEmailId() + ","
-			//					+ user.getMobileNumber());
-			session.close();
-			return user;
-		} else {
-			return null;
-		}
+		String hqlQuery = "from UserNote note where note.noteId = :noteId";
+		Query query = session.createQuery(hqlQuery);
+		query.setInteger("noteId", id);
+		UserNote note = (UserNote) query.uniqueResult();
+		session.close();
+		return note;
 	}
 
-
-
-
-
 	@Override
-	public void deleteNote(int id) {
+	public void deleteNote(int noteId) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("DELETE from UserNote u where u.id= :id");
-		query.setInteger("id", id);
+		Query query = session.createQuery("DELETE from UserNote u where u.noteId= :noteId");
+		query.setInteger("noteId", noteId);
 		query.executeUpdate();
 		tx.commit();
 		session.close();
@@ -96,19 +82,12 @@ public class NoteDaoImpl implements NoteDao {
 	@Override
 	public Labels getLabelById(int id) {
 		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("from Labels where labelId= :labelId");
+		///Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("from Labels label where label.labelId= :labelId");
 		query.setInteger("labelId", id);
-		Labels label = (Labels) query.uniqueResult();
-		tx.commit();
-		if (label != null) {
-						System.out.println("User detail is=" + label.getLabelId() + "," + label.getLabelName()+ ","
-								);
-			session.close();
-			return label;
-		} else {
-			return null;
-		}
+		Labels label =  (Labels) query.uniqueResult();
+		session.close();
+		return label;
 	}
 
 
