@@ -39,7 +39,7 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy="userId")
 	@JsonIgnore
-	private Set<UserNote> userId;
+	private Set<Note> userId;
 	
 	@OneToMany(mappedBy="userId")
 	@JsonIgnore
@@ -54,11 +54,11 @@ public class User implements Serializable {
 		this.setoflabel = setoflabel;
 	}
 
-	public Set<UserNote> getUserId() {
+	public Set<Note> getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Set<UserNote> userId) {
+	public void setUserId(Set<Note> userId) {
 		this.userId = userId;
 	}
 

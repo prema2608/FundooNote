@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.model.Labels;
-import com.bridgelabz.model.UserNote;
+import com.bridgelabz.model.Note;
 import com.bridgelabz.service.NoteService;
 
 @RestController
@@ -25,7 +25,7 @@ public class Note_Controller {
 	private NoteService noteService;
 
 	@RequestMapping(value = "/createnote", method = RequestMethod.POST)
-	public ResponseEntity<?> createNote(@RequestHeader("token") String token,@RequestBody UserNote user, HttpServletRequest request) {
+	public ResponseEntity<?> createNote(@RequestHeader("token") String token,@RequestBody Note user, HttpServletRequest request) {
 
 		try {
 			if (noteService.createNote(token,user, request))
@@ -38,26 +38,29 @@ public class Note_Controller {
 	}
 
 
-	@RequestMapping(value = "/updatenote", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateNote(@RequestParam("id") int id, @RequestBody UserNote user,
-			HttpServletRequest request) {
+	
 
-		UserNote user2 = noteService.updateNote(id, user, request);
-		if (user2 != null) {
-			return new ResponseEntity<UserNote>(user2, HttpStatus.FOUND);
+	@RequestMapping(value = "/updatenote", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateNote(@RequestHeader("token") String token, @RequestParam("noteId") int noteId,
+			@RequestBody Note note, HttpServletRequest request) {
+
+		Note currentNote = noteService.updateNote(token, noteId, note, request);
+		if (currentNote != null) {
+			return new ResponseEntity<Note>(currentNote, HttpStatus.FOUND);
 		} else {
-			return new ResponseEntity<String>("Id incorrect. Please enter valid Id present in database",
+			return new ResponseEntity<String>("Please enter the value note id or verify your login",
 					HttpStatus.NOT_FOUND);
 		}
-	}
-
+}
+	
+	
 
 	@RequestMapping(value = "/deletenote", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteNote(@RequestParam("noteId") int noteId,@RequestHeader("token") String token, HttpServletRequest request) {
 //try {
-		UserNote user = noteService.deleteNote(noteId,token, request);
+		Note user = noteService.deleteNote(noteId,token, request);
 		if (user != null) {
-			return new ResponseEntity<UserNote>(user, HttpStatus.FOUND);
+			return new ResponseEntity<Note>(user, HttpStatus.FOUND);
 		} 
 //}catch (Exception e) {
 //	e.printStackTrace();
@@ -73,9 +76,9 @@ public class Note_Controller {
 
 	@RequestMapping(value = "/retrivenote", method = RequestMethod.GET)
 	public ResponseEntity<?> retrieveNote(@RequestHeader("token") String token,HttpServletRequest request) {
-		List<UserNote> listOfNote = noteService.retrieveNote(token,request);
+		List<Note> listOfNote = noteService.retrieveNote(token,request);
 		if (listOfNote!= null) {
-			return new ResponseEntity<List<UserNote>>(listOfNote, HttpStatus.FOUND);
+			return new ResponseEntity<List<Note>>(listOfNote, HttpStatus.FOUND);
 		} else {
 			return new ResponseEntity<String>("Id incorrect. Please enter valid Id  present in database",
 					HttpStatus.NOT_FOUND);
@@ -101,36 +104,30 @@ public class Note_Controller {
 	}
 
 
-
-
-	@RequestMapping(value = "/editlabel", method = RequestMethod.PUT)
-	public ResponseEntity<?> editLabel(@RequestParam("id") int id, @RequestBody Labels label,
-			HttpServletRequest request) {
-
-		Labels user2 = noteService.editLabel(id, label, request);
-		if (user2 != null) {
-			return new ResponseEntity<Labels>(user2,HttpStatus.FOUND);
-		}
-		else {
-			return new ResponseEntity<String>("Id incorrect. Please enter valid Id present in database",
+	@RequestMapping(value = "/updatelabel", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateUser(@RequestHeader("token") String token, @RequestParam("labelId") int labelId,
+			@RequestBody Labels label, HttpServletRequest request) {
+		Labels currentLabel = noteService.editLabel(token, labelId, label, request);
+		if (currentLabel != null) {
+			return new ResponseEntity<Labels>(currentLabel, HttpStatus.FOUND);
+		} else {
+			return new ResponseEntity<String>("User id given is not present or Note yet been activated",
 					HttpStatus.NOT_FOUND);
 		}
-
 	}
 
-
 	@RequestMapping(value = "/deletelabel", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteLabel(@RequestParam("id") int id, HttpServletRequest request) {
+	public ResponseEntity<?> deleteLabel(@RequestHeader("token") String token, @RequestParam("labelId") int labelId,
+			HttpServletRequest request) {
 
-		Labels label = noteService.deleteLabel(id, request);
+		Labels label = noteService.deleteLabel(token, labelId, request);
 		if (label != null) {
 			return new ResponseEntity<Labels>(label, HttpStatus.FOUND);
 		} else {
-			return new ResponseEntity<String>("Id incorrect. Please enter valid Id  present in database",
+			return new ResponseEntity<String>("User id given is not present or Note yet been activated",
 					HttpStatus.NOT_FOUND);
 		}
-	}
-
+}
 
 
 	@RequestMapping(value = "/retrivelabel", method = RequestMethod.GET)

@@ -54,7 +54,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.bridgelabz.model.User</value>
-				<value>com.bridgelabz.model.UserNote</value>
+				<value>com.bridgelabz.model.Note</value>
 				<value>com.bridgelabz.model.Labels</value>
 			</list>
 		</property>

@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.model.User;
@@ -22,6 +22,7 @@ public class User_Controller {
 
 	@Autowired
 	private UserService userService;
+
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<Void> registerUser(@RequestBody User user, HttpServletRequest request) {
@@ -35,35 +36,39 @@ public class User_Controller {
 		return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<?> loginUser(@RequestParam("emailId") String emailId,
-			@RequestParam("password") String password, HttpServletRequest request,HttpServletResponse response) {
 
-		User user = userService.loginUser(emailId, password, request,response);
-		if (user != null) {
-			return new ResponseEntity<User>(user, HttpStatus.FOUND);
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<?> loginUser(@RequestBody User user, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		User currentUser = userService.loginUser(user, request, response);
+		if (currentUser != null) {
+			return new ResponseEntity<User>(currentUser, HttpStatus.FOUND);
 		} else {
-			return new ResponseEntity<String>("Incorrect emailId or password", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("Please check the emailId or password", HttpStatus.NOT_FOUND);
 		}
 	}
 
+                                      
+	
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateUser(@RequestParam("id") int id, @RequestBody User user,
+	public ResponseEntity<?> updateUser(@RequestHeader("token") String token, @RequestBody User user,
 			HttpServletRequest request) {
 
-		User user2 = userService.updateUser(id, user, request);
-		if (user2 != null) {
-			return new ResponseEntity<User>(user2, HttpStatus.FOUND);
+		User currentUser = userService.updateUser(token, user, request);
+		if (currentUser != null) {
+			return new ResponseEntity<User>(currentUser, HttpStatus.FOUND);
 		} else {
 			return new ResponseEntity<String>("Email incorrect. Please enter valid email address present in database",
 					HttpStatus.NOT_FOUND);
 		}
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteUser(@RequestParam("id") int id, HttpServletRequest request) {
 
-		User user = userService.deleteUser(id, request);
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteUser(@RequestHeader("token") String token, HttpServletRequest request) {
+
+		User user = userService.deleteUser(token, request);
 		if (user != null) {
 			return new ResponseEntity<User>(user, HttpStatus.FOUND);
 		} else {
@@ -71,17 +76,18 @@ public class User_Controller {
 					HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@RequestMapping(value = "/activationstatus/{token:.+}", method = RequestMethod.GET)
-    public ResponseEntity<?> activateUser(@PathVariable("token") String token, HttpServletRequest request) {
 
-        User user = userService.activateUser(token, request);
-        if (user != null) {
-            return new ResponseEntity<User>(user, HttpStatus.FOUND);
-        } else {
-            return new ResponseEntity<String>("Email incorrect. Please enter valid email address present in database",
-                    HttpStatus.NOT_FOUND);
-        }
-    }
+
+	@RequestMapping(value = "/activationstatus/{token:.+}", method = RequestMethod.GET)
+	public ResponseEntity<?> activateUser(@PathVariable("token") String token, HttpServletRequest request) {
+
+		User user = userService.activateUser(token, request);
+		if (user != null) {
+			return new ResponseEntity<User>(user, HttpStatus.FOUND);
+		} else {
+			return new ResponseEntity<String>("Email incorrect. Please enter valid email address present in database",
+					HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

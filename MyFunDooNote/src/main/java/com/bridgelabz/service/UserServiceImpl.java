@@ -24,63 +24,81 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private EmailUtil emailUtil;
-	
 
-    @Autowired
-    private PasswordEncoder bcryptEncoder;
+
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+
 	@Transactional
 	public boolean register(User user, HttpServletRequest request) {
 		user.setPassword(bcryptEncoder.encode(user.getPassword()));
 		int id = userDao.register(user);
 		if (id > 0) {
 			String token = tokenGenerator.generateToken(String.valueOf(id));
-			System.out.println(token);
-			String verificationLink= "http://localhost:8080/MyFunDooNote/activationstatus/"+token;
-			emailUtil.sendEmail("", "Hi, click the link below to verify your email ", verificationLink);
+			StringBuffer requestURL = request.getRequestURL();
+			String activationURL = requestURL.substring(0, requestURL.lastIndexOf("/"));
+			activationURL = activationURL + "/activationstatus/" + token;
+			emailUtil.sendEmail("", "please click the link below to verify your Email", activationURL);
 			return true;
 		}
 		return false;
 	}
 
-	public User loginUser(String emailId, String password, HttpServletRequest request,HttpServletResponse response) {
-		User user =userDao.loginUser(emailId,response);
-		if(bcryptEncoder.matches(password, user.getPassword())){
-			return user;
+
+
+	@Transactional
+	public User loginUser(User user, HttpServletRequest request, HttpServletResponse response) {
+		User userVerification = userDao.loginUser(user.getEmailId());
+		if (bcryptEncoder.matches(user.getPassword(), userVerification.getPassword()) && userVerification.isActivate_Status()) {
+			String token = tokenGenerator.generateToken(String.valueOf(userVerification.getId()));
+			response.setHeader("token", token);
+			return userVerification;
 		}
 		return null;
 	}
 
-	public User updateUser(int id, User user, HttpServletRequest request) {
-		User user2 = userDao.getUserById(id);
-		if (user2 != null) {
-			user2.setEmailId(user.getEmailId());
-			user2.setMobileNumber(user.getMobileNumber());
-			user2.setName(user.getName());
-			user2.setPassword(user.getPassword());
-			userDao.updateUser(id, user2);
+
+	@Transactional
+	public User updateUser(String token, User user, HttpServletRequest request) {
+		int userId = tokenGenerator.VerifyToken(token);
+		User currentUser = userDao.getUserById(userId);
+		if (currentUser != null) {
+			currentUser.setMobileNumber(user.getMobileNumber());
+			currentUser.setName(user.getName());
+			currentUser.setEmailId(user.getEmailId());
+			currentUser.setPassword(user.getPassword());
+			currentUser.setPassword(bcryptEncoder.encode(currentUser.getPassword()));
+			userDao.updateUser(currentUser);
 		}
-		return user2;
+		return currentUser;
 	}
 
-	public User deleteUser(int id, HttpServletRequest request) {
-		User user2 = userDao.getUserById(id);
-		if (user2 != null) {
-			userDao.deleteUser(id);
+
+	@Transactional
+	public User deleteUser(String token, HttpServletRequest request) {
+		int userId = tokenGenerator.VerifyToken(token);
+		User currentUser = userDao.getUserById(userId);
+		if (currentUser != null)
+		{
+			userDao.deleteUser(userId);
 		}
-		return user2;
-	}
+		return currentUser;
+	}	
+
+	
 	
 
-    public User activateUser(String token, HttpServletRequest request) {
-        int id=tokenGenerator.VerifyToken(token);
-        User user=userDao.getUserById(id);
-        if(user!=null)
-        {
-            user.setActivate_Status(true);
-            userDao.updateUser(id, user);
-        }
-        return user;
-    }
+	@Transactional
+	public User activateUser(String token, HttpServletRequest request) {
+		int id=tokenGenerator.VerifyToken(token);
+		User user=userDao.getUserById(id);
+		if(user!=null)
+		{
+			user.setActivate_Status(true);
+			userDao.updateUser(user);
+		}
+		return user;
+	}
 
 
 

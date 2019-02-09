@@ -14,3 +14,6 @@
 1549610652551	Rename type 'NoteController'
 1549612893131	Rename local variable 'listOfLabel'
 1549612911415	Rename local variable 'note'
+1549693339502	Rename local variable 'newUser'
+1549695039970	Rename type 'UserNote'
+1549711736639	Rename local variable 'newNote'

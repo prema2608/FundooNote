@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bridgelabz.model.Labels;
-import com.bridgelabz.model.UserNote;
+import com.bridgelabz.model.Note;
 
 
 @Repository
@@ -19,7 +19,7 @@ public class NoteDaoImpl implements NoteDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public int createNote(UserNote user) {
+	public int createNote(Note user) {
 		int userId = 0;
 		Session session = sessionFactory.getCurrentSession();
 		userId = (Integer) session.save(user);
@@ -27,7 +27,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 
-	public void updateNote(UserNote user) {
+	public void updateNote(Note user) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		session.update(user);
@@ -36,13 +36,13 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public UserNote getNoteById(int id) {
+	public Note getNoteById(int id) {
 
 		Session session = sessionFactory.openSession();
 		String hqlQuery = "from UserNote note where note.noteId = :noteId";
 		Query query = session.createQuery(hqlQuery);
 		query.setInteger("noteId", id);
-		UserNote note = (UserNote) query.uniqueResult();
+		Note note = (Note) query.uniqueResult();
 		session.close();
 		return note;
 	}
@@ -57,12 +57,12 @@ public class NoteDaoImpl implements NoteDao {
 		tx.commit();
 		session.close();
 	}
-	public List<UserNote> retriveNote(int id) {
+	public List<Note> retriveNote(int id) {
 		Session session = sessionFactory.openSession();
-		Query query=session.createQuery("from UserNote where userId= :userId");
+		Query query= session.createQuery("from UserNote where userId= :userId");
 		query.setInteger("userId", id);
 		@SuppressWarnings("unchecked")
-		List<UserNote> listOfNote = query.list();
+		List<Note> listOfNote = query.list();
 		return listOfNote;
 	}
 
@@ -70,7 +70,7 @@ public class NoteDaoImpl implements NoteDao {
 	//////////////////////////
 	//labels
 	
-	public int createLabels(Labels label) 
+	public int createLabel(Labels label) 
 	{
 		int userId = 0;
 		Session session = sessionFactory.getCurrentSession();
@@ -91,14 +91,16 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 
-	@Override
-	public void editLabel(int id, Labels label) {
+	
+
+	public void editLabel(Labels label) {
 		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 		session.update(label);
-		tx.commit();
+		transaction.commit();
 		session.close();
-	}		
+	}
+
 
 
 	@Override
