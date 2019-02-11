@@ -27,10 +27,10 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 
-	public void updateNote(Note user) {
+	public void updateNote(Note note) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.update(user);
+		session.update(note);
 		tx.commit();
 		session.close();
 	}
@@ -39,7 +39,7 @@ public class NoteDaoImpl implements NoteDao {
 	public Note getNoteById(int id) {
 
 		Session session = sessionFactory.openSession();
-		String hqlQuery = "from UserNote note where note.noteId = :noteId";
+		String hqlQuery = "from Note  where noteId = :noteId";
 		Query query = session.createQuery(hqlQuery);
 		query.setInteger("noteId", id);
 		Note note = (Note) query.uniqueResult();
@@ -51,7 +51,7 @@ public class NoteDaoImpl implements NoteDao {
 	public void deleteNote(int noteId) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("DELETE from UserNote u where u.noteId= :noteId");
+		Query query = session.createQuery("DELETE from Note u where u.noteId= :noteId");
 		query.setInteger("noteId", noteId);
 		query.executeUpdate();
 		tx.commit();
@@ -59,7 +59,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 	public List<Note> retriveNote(int id) {
 		Session session = sessionFactory.openSession();
-		Query query= session.createQuery("from UserNote where userId= :userId");
+		Query query= session.createQuery("from Note where userId= :userId");
 		query.setInteger("userId", id);
 		@SuppressWarnings("unchecked")
 		List<Note> listOfNote = query.list();

@@ -7,11 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.model.User;
@@ -23,17 +29,25 @@ public class User_Controller {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private Validator validator;
+
+	@InitBinder
+	private void initBinder(WebDataBinder binder) {
+		binder.setValidator(validator);
+	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<Void> registerUser(@RequestBody User user, HttpServletRequest request) {
-		try {
+	public ResponseEntity<?> registerUser(@Validated @RequestBody User user, BindingResult results,
+			HttpServletRequest request) {
+		if (results.hasErrors()) {
+			return new ResponseEntity<String>("Enter the correct details in proper format", HttpStatus.CONFLICT);
+		} else {
 			if (userService.register(user, request))
 				return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			else
+				return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 	}
 
 
@@ -49,8 +63,8 @@ public class User_Controller {
 		}
 	}
 
-                                      
-	
+
+
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@RequestHeader("token") String token, @RequestBody User user,
 			HttpServletRequest request) {
@@ -89,5 +103,31 @@ public class User_Controller {
 					HttpStatus.NOT_FOUND);
 		}
 	}
+
+	@RequestMapping(value="/forgotpassword",method=RequestMethod.POST)
+	public ResponseEntity<?> forgotPassword(@RequestParam("emailId")String emailId,HttpServletRequest request){
+
+		boolean user=userService.forgotPassword(emailId,request);
+		if (user==false) {
+			return new ResponseEntity<User>(HttpStatus.FOUND);
+		} else {
+			return new ResponseEntity<String>("Email incorrect. Please enter valid email address present in database",
+					HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@RequestMapping(value="/resetpassword/{token:.+}",method=RequestMethod.PUT)
+	public ResponseEntity<?> resetPassword(@RequestBody  User user,@PathVariable("token")String token,HttpServletRequest request)
+	{
+		User user1=userService.resetPassword(user,token,request);
+		if(user1!=null) {
+			return new ResponseEntity<String>("password is Succeessfully updated",HttpStatus.FOUND);
+
+		}else {
+			return new ResponseEntity<String>("Dinied In Reseting Password ",HttpStatus.NOT_FOUND);
+		}
+	}
+
+
 
 }

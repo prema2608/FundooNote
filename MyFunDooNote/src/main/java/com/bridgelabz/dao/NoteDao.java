@@ -9,7 +9,7 @@ public interface NoteDao
 {
 	 int createNote(Note note);
 	 Note getNoteById(int id);
-	 void updateNote( Note user);
+	 void updateNote( Note note);
 	 void deleteNote(int id);
 	 List<Note> retriveNote(int id);
 	

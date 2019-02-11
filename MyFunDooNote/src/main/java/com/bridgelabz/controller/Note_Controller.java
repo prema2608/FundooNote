@@ -25,10 +25,10 @@ public class Note_Controller {
 	private NoteService noteService;
 
 	@RequestMapping(value = "/createnote", method = RequestMethod.POST)
-	public ResponseEntity<?> createNote(@RequestHeader("token") String token,@RequestBody Note user, HttpServletRequest request) {
+	public ResponseEntity<?> createNote(@RequestHeader("token") String token,@RequestBody Note note, HttpServletRequest request) {
 
 		try {
-			if (noteService.createNote(token,user, request))
+			if (noteService.createNote(token,note, request))
 				return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

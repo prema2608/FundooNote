@@ -100,6 +100,33 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Transactional
+    public boolean forgotPassword(String emailId, HttpServletRequest request) {
+        User user = userDao.loginUser(emailId);
+        if (user != null) {
+            String token = tokenGenerator.generateToken(String.valueOf(user.getId()));
+             StringBuffer requestUrl = request.getRequestURL();
+                String forgotPasswordLink = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+                forgotPasswordLink = forgotPasswordLink + "/resetpassword/" + token;
+                emailUtil.sendEmail("", "Rest password verification", forgotPasswordLink);
+           
+        }
+        return false;
+
+    }
+
+	
+	   @Transactional
+	    public User resetPassword(User user, String token, HttpServletRequest request) {
+	        int id = tokenGenerator.VerifyToken(token);
+	        User reSetUser = userDao.getUserById(id);
+	        if (reSetUser != null) {
+	            reSetUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+	            userDao.updateUser(reSetUser);
+	            return reSetUser;
+	        }
+	        return null;
+	    }
 
 
 }

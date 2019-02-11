@@ -55,8 +55,8 @@ public class NoteServiceImpl implements NoteService {
 				currentNote.setPinned(note.isPinned());
 				currentNote.setInTrash(note.isInTrash());
 				noteDao.updateNote(currentNote);
+				return currentNote;
 			}
-			return currentNote;
 		}
 		return null;
 }
